@@ -95,9 +95,8 @@ class Builder extends LTool
     user_options = atom.config.get("latextools.builderSettings.options")
     user_options = user_options.concat directives.option
 
-    # Special case: no default options, no user options give [undefined]
-    if user_options.length==1 && user_options[0] == undefined
-      user_options = []
+    # Filter out [undefined] when directives.option or user_options are empty
+    user_options = user_options.filter (x) -> x isnt undefined
 
     # white-list the selectable programs
     # on Windows / miktex, allow both pdftex, etc and pdflatex
